@@ -22,6 +22,10 @@ Get the modules above, and that one by cloning it:
 Running the tests
 -----------------
 
+Install the dependencies using [Bundler](http://gembundler.com):
+
+    BUNDLE_GEMFILE=.gemfile bundle install
+
 Run the following command:
 
     rake spec
