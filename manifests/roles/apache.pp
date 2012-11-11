@@ -17,6 +17,6 @@ class bazinga::roles::apache (
 
   user { $apache_user:
     ensure => present,
-    groups => [ $apache_group ],
+    groups => [ $apache_user, $apache_group ],
   }
 }
