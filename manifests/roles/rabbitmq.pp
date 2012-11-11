@@ -15,10 +15,10 @@
 #   The rabbitmq port
 #
 class bazinga::roles::rabbitmq (
-  $rabbitmq_user,
-  $rabbitmq_password,
-  $rabbitmq_vhost,
-  $rabbitmq_port
+  $rabbitmq_user     = 'guest',
+  $rabbitmq_password = 'guest',
+  $rabbitmq_vhost    = 'guest',
+  $rabbitmq_port     = 5672
 ) {
 
   class { 'rabbitmq::repo::apt': }
