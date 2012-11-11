@@ -1,0 +1,4 @@
+# = Class: bazinga
+#
+class bazinga {
+}

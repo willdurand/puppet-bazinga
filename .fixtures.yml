@@ -1,0 +1,5 @@
+fixtures:
+  repositories:
+    php: git://github.com/saz/puppet-php.git
+  symlinks:
+    bazinga: "#{source_dir}"
