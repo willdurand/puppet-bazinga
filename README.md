@@ -28,7 +28,7 @@ Install the dependencies using [Bundler](http://gembundler.com):
 
 Run the following command:
 
-    rake spec
+    BUNDLE_GEMFILE=.gemfile bundle exec rake spec
 
 
 License
