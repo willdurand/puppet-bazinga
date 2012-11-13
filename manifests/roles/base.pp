@@ -1,11 +1,11 @@
-# = Role: bazinga::roles::server
+# = Role: bazinga::roles::base
 #
 # == Parameters:
 #
 # [*vagrant*]
 #   Set to `true` if the server is a vagrant VM.
 #
-class bazinga::roles::server (
+class bazinga::roles::base (
   $vagrant = false
 ) {
 
