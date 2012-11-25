@@ -3,10 +3,14 @@
 # This script can be used to initialize a Vagrant VM
 # to avoid weird errors due to a random Puppet version.
 
-PUPPET_VERSION='2.7.19'
+if [ -z "$PUPPET_VERSION" ]; then
+    PUPPET_VERSION='2.7.19'
+fi
 
 # See: http://apt.puppetlabs.com/
-DISTRIBUTION='squeeze'
+if [ -z "$DISTRIBUTION" ]; then
+    DISTRIBUTION='squeeze'
+fi
 
 if [ `puppet --version` == $PUPPET_VERSION ] ; then
     exit 0
