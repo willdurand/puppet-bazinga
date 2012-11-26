@@ -18,7 +18,7 @@ class bazinga::roles::base (
 
   # SSH
   package { 'openssh-server':
-    ensure     => present,
+    ensure => present,
   }
 
   service { 'ssh':
@@ -28,15 +28,13 @@ class bazinga::roles::base (
   }
 
   # Vagrant
-  if $vagrant == true {
-    # vagrant needs these packages
-    package { ['nfs-common', 'portmap']:
-      ensure => present,
-    }
-  } else {
-    package { ['nfs-common', 'portmap']:
-      ensure => absent,
-    }
+  $ensure_vagrant = $vagrant ? {
+    true    => present,
+    default => absent
+  }
+
+  package { ['nfs-common', 'portmap']:
+    ensure => $ensure_vagrant,
   }
 
   # Common tools
