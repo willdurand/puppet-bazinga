@@ -12,14 +12,26 @@
 #   The address to listen
 #
 class bazinga::roles::apache_fpm (
-  $apache_user  = 'www-data',
-  $apache_group = 'www-data',
+  $apache_user  = 'UNDEF',
+  $apache_group = 'UNDEF',
   $listen       = '127.0.0.1:9000'
 ) {
 
+  include ::apache::params
+
+  $user = $apache_user ? {
+    'UNDEF' => $::apache::params::user,
+    default => $apache_user
+  }
+
+  $group = $apache_group ? {
+    'UNDEF' => $::apache::params::group,
+    default => $apache_group
+  }
+
   class { 'bazinga::roles::apache':
-    apache_user   => $apache_user,
-    apache_group  => $apache_group,
+    apache_user   => $user,
+    apache_group  => $group,
   }
 
   package { 'libapache2-mod-fastcgi':
@@ -47,8 +59,8 @@ class bazinga::roles::apache_fpm (
   }
 
   php::fpm::pool { $apache_user:
-    user                    => $apache_user,
-    group                   => $apache_group,
+    user                    => $user,
+    group                   => $group,
     listen                  => $listen,
     pm                      => 'dynamic',
     pm_max_children         => 10,
