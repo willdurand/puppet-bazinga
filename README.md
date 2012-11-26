@@ -11,6 +11,18 @@ following modules:
 * [puppet-rabbitmq](https://github.com/puppetlabs/puppetlabs-rabbitmq)
 
 
+Minimum Requirements
+--------------------
+
+The `bazinga::roles::base` role requires the following modules to work:
+
+* [puppet-apt](https://github.com/puppetlabs/puppetlabs-apt)
+* [puppet-ntp](https://github.com/saz/puppet-ntp)
+* [stdlib](https://github.com/puppetlabs/puppetlabs-stdlib)
+
+Other roles need modules listed in introduction.
+
+
 Installation
 ------------
 
