@@ -45,6 +45,9 @@ class bazinga::roles::rabbitmq (
     read_permission      => '.*',
     write_permission     => '.*',
     provider             => 'rabbitmqctl',
-    require              => [ Rabbitmq_User[$rabbitmq_user], Rabbitmq_Vhost[$rabbitmq_vhost] ],
+    require              => [
+      Rabbitmq_User[$rabbitmq_user],
+      Rabbitmq_Vhost[$rabbitmq_vhost]
+    ],
   }
 }

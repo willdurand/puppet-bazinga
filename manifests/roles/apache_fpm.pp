@@ -12,20 +12,20 @@
 #   The address to listen
 #
 class bazinga::roles::apache_fpm (
-  $apache_user  = 'UNDEF',
-  $apache_group = 'UNDEF',
+  $apache_user  = 'UNSET',
+  $apache_group = 'UNSET',
   $listen       = '127.0.0.1:9000'
 ) {
 
   include ::apache::params
 
   $user = $apache_user ? {
-    'UNDEF' => $::apache::params::user,
+    'UNSET' => $::apache::params::user,
     default => $apache_user
   }
 
   $group = $apache_group ? {
-    'UNDEF' => $::apache::params::group,
+    'UNSET' => $::apache::params::group,
     default => $apache_group
   }
 
