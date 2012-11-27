@@ -1,6 +1,8 @@
 puppet-bazinga
 ==============
 
+[![Build Status](https://secure.travis-ci.org/willdurand/puppet-bazinga.png?branch=master)](https://travis-ci.org/willdurand/puppet-bazinga)
+
 This Puppet module contains a set of roles and some useful functions for the
 following modules:
 
