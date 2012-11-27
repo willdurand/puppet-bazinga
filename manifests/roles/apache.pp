@@ -26,12 +26,11 @@ class bazinga::roles::apache (
     default => $apache_group
   }
 
+  group { $group:
+    ensure => present,
+  }
 
   if $user != $group {
-    group { $group:
-      ensure => present,
-    }
-
     user { $user:
       ensure     => present,
       managehome => true,
@@ -42,6 +41,7 @@ class bazinga::roles::apache (
     user { $user:
       ensure     => present,
       managehome => true,
+      require    => Group[$group],
     }
   }
 
