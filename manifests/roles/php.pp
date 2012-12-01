@@ -8,7 +8,10 @@ class bazinga::roles::php {
   }
 
   class { '::php': }
-  class { 'composer': }
+
+  class { 'composer':
+    auto_update => true,
+  }
 
   php::conf { 'default':
     source => 'puppet:///modules/bazinga/php/default.ini',
