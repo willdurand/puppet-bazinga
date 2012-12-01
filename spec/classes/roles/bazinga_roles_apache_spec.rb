@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'bazinga::roles::apache', :type => :class do
-  let(:title) { 'bazinga::roles:apache' }
+  let(:title) { 'bazinga::roles::apache' }
   let(:facts) {{ :osfamily => 'Debian' }}
 
   describe 'with Debian family' do
