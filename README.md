@@ -11,6 +11,7 @@ following modules:
 * [puppet-mysql](https://github.com/puppetlabs/puppetlabs-mysql)
 * [puppet-php](https://github.com/saz/puppet-php)
 * [puppet-rabbitmq](https://github.com/puppetlabs/puppetlabs-rabbitmq)
+* [puppet-composer](https://github.com/willdurand/puppet-composer)
 
 
 Minimum Requirements

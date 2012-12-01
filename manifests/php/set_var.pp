@@ -20,6 +20,5 @@ define bazinga::php::set_var (
     unless  => "grep -xqe '${name}[[:space:]]*=[[:space:]]*${value}' -- ${php::params::conf_dir}${file_ini}",
     path    => '/bin:/usr/bin',
     require => Class['bazinga::roles::php'],
-    notify  => Class['php::fpm::service'],
   }
 }
