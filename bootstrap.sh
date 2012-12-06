@@ -20,5 +20,5 @@ wget http://apt.puppetlabs.com/puppetlabs-release-$DISTRIBUTION.deb
 sudo dpkg -i puppetlabs-release-$DISTRIBUTION.deb
 rm -f puppetlabs-release-$DISTRIBUTION.deb
 sudo apt-get update
-sudo apt-get -y --force-yes install puppet-common=$PUPPET_VERSION-1puppetlabs2
-sudo apt-get -y --force-yes install puppet=$PUPPET_VERSION-1puppetlabs2
+sudo apt-get -y --force-yes install puppet-common=$PUPPET_VERSION-1puppetlabs1
+sudo apt-get -y --force-yes install puppet=$PUPPET_VERSION-1puppetlabs1
