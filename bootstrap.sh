@@ -4,7 +4,7 @@
 # to avoid weird errors due to a random Puppet version.
 
 if [ -z "$PUPPET_VERSION" ]; then
-    PUPPET_VERSION='2.7.19'
+    PUPPET_VERSION='2.7.20'
 fi
 
 # See: http://apt.puppetlabs.com/
