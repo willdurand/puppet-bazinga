@@ -11,6 +11,7 @@ class bazinga::roles::php {
 
   class { 'composer':
     auto_update => true,
+    require     => Class['php'],
   }
 
   php::conf { 'default':
