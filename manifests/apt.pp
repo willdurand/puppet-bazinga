@@ -10,11 +10,15 @@ class bazinga::apt {
     }
 
     apt::source { 'dotdeb':
-      location   => 'http://packages.dotdeb.org',
-      release    => 'squeeze-php54',
-      repos      => 'all',
+      location => 'http://packages.dotdeb.org',
+      release  => 'squeeze-php54',
+      repos    => 'all',
+      key      => '89DF5277',
+    }
+
+    apt::key { 'dotdeb':
       key        => '89DF5277',
-      key_server => 'keys.gnupg.net',
+      key_source => 'http://www.dotdeb.org/dotdeb.gpg',
     }
   }
 
