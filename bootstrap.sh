@@ -2,6 +2,15 @@
 #
 # This script can be used to initialize a Vagrant VM
 # to avoid weird errors due to a random Puppet version.
+#
+# Usage:
+#
+#   ./bootstrap.sh [--distribution <distribution name>]
+#
+
+if [ '2' -eq "$#" ] && [ '--distribution' == "$1" ] ; then
+    DISTRIBUTION="$2"
+fi
 
 if [ -z "$PUPPET_VERSION" ]; then
     PUPPET_VERSION='2.7.20'
@@ -15,6 +24,8 @@ fi
 if [ `puppet --version` == $PUPPET_VERSION ] ; then
     exit 0
 fi
+
+echo "Installing Puppet version $PUPPET_VERSION for $DISTRIBUTION..."
 
 wget -q http://apt.puppetlabs.com/puppetlabs-release-$DISTRIBUTION.deb
 sudo dpkg -i puppetlabs-release-$DISTRIBUTION.deb > /dev/null
