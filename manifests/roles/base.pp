@@ -38,7 +38,15 @@ class bazinga::roles::base (
   }
 
   # Common tools
-  package { ['screen', 'vim', 'curl', 'htop', 'ack-grep']:
+  package { ['screen', 'curl', 'htop', 'ack-grep']:
+    ensure => latest,
+  }
+
+  package { 'vim':
+    name   => $::operatingsystem ? {
+      'ubuntu' => 'vim-nox',
+      default  => 'vim'
+    },
     ensure => latest,
   }
 }
