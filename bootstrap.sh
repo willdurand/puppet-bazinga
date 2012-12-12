@@ -16,9 +16,13 @@ if [ `puppet --version` == $PUPPET_VERSION ] ; then
     exit 0
 fi
 
-wget http://apt.puppetlabs.com/puppetlabs-release-$DISTRIBUTION.deb
-sudo dpkg -i puppetlabs-release-$DISTRIBUTION.deb
+wget -q http://apt.puppetlabs.com/puppetlabs-release-$DISTRIBUTION.deb
+sudo dpkg -i puppetlabs-release-$DISTRIBUTION.deb > /dev/null
 rm -f puppetlabs-release-$DISTRIBUTION.deb
-sudo apt-get update
-sudo apt-get -y --force-yes install puppet-common=$PUPPET_VERSION-1puppetlabs1
-sudo apt-get -y --force-yes install puppet=$PUPPET_VERSION-1puppetlabs1
+sudo apt-get update > /dev/null
+sudo apt-get -y --force-yes install puppet-common=$PUPPET_VERSION-1puppetlabs1 > /dev/null
+sudo apt-get -y --force-yes install puppet=$PUPPET_VERSION-1puppetlabs1 > /dev/null
+
+if [ 0 -eq $? ] ; then
+    echo "Puppet $PUPPET_VERSION successfully installed"
+fi
