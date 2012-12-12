@@ -15,6 +15,11 @@ class bazinga::apt {
         release  => 'lucid',
         repos    => 'main',
       }
+
+      apt::key { 'ondrej-php5':
+        key        => 'E5267A6C',
+        key_server => 'keyserver.ubuntu.com',
+      }
     }
     'debian': {
       apt::source { 'debian':
