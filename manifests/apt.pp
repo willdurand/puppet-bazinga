@@ -9,6 +9,12 @@ class bazinga::apt {
         release  => 'lucid',
         repos    => 'main universe multiverse restricted',
       }
+
+      apt::source { 'ondrej-php5':
+        location => 'http://ppa.launchpad.net/ondrej/php5/ubuntu',
+        release  => 'lucid',
+        repos    => 'main',
+      }
     }
     'debian': {
       apt::source { 'debian':
