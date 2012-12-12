@@ -42,11 +42,13 @@ class bazinga::roles::base (
     ensure => latest,
   }
 
+  $vim_package = $::operatingsystem ? {
+    'ubuntu' => 'vim-nox',
+    default  => 'vim'
+  }
+
   package { 'vim':
-    name   => $::operatingsystem ? {
-      'ubuntu' => 'vim-nox',
-      default  => 'vim'
-    },
     ensure => latest,
+    name   => $vim_package,
   }
 }

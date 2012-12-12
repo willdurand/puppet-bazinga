@@ -6,9 +6,9 @@ class bazinga::apt {
     'ubuntu': {
       apt::source { 'ubuntu':
         location => 'http://archive.ubuntu.com/ubuntu',
-                               release  => 'lucid',
-                               repos    => 'main universe multiverse restricted',
-                       }
+        release  => 'lucid',
+        repos    => 'main universe multiverse restricted',
+      }
     }
     'debian': {
       apt::source { 'debian':
@@ -18,16 +18,18 @@ class bazinga::apt {
       }
 
       apt::source { 'dotdeb':
-             location => 'http://packages.dotdeb.org',
-                               release  => 'squeeze-php54',
-                               repos    => 'all',
-                               key      => '89DF5277',
+        location => 'http://packages.dotdeb.org',
+        release  => 'squeeze-php54',
+        repos    => 'all',
+        key      => '89DF5277',
       }
 
       apt::key { 'dotdeb':
-                               key        => '89DF5277',
-                               key_source => 'http://www.dotdeb.org/dotdeb.gpg',
+        key        => '89DF5277',
+        key_source => 'http://www.dotdeb.org/dotdeb.gpg',
       }
+    }
+    default: {
     }
   }
 

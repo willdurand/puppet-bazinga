@@ -29,8 +29,14 @@ class bazinga::roles::php {
     notify => $notify_service,
   }
 
+  $apc_package_prefix = $::operatingsystem ? {
+    'ubuntu'     => 'php-',
+    default      => 'php5-'
+  }
+
   php::module { 'apc':
-    source => 'puppet:///modules/bazinga/php/apc.ini',
-    notify => $notify_service,
+    source         => 'puppet:///modules/bazinga/php/apc.ini',
+    notify         => $notify_service,
+    package_prefix => $apc_package_prefix,
   }
 }
