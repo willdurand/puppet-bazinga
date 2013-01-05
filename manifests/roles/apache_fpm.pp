@@ -58,7 +58,7 @@ class bazinga::roles::apache_fpm (
     unless  => '/usr/bin/test -f /etc/apache2/mods-enabled/fastcgi.load',
   }
 
-  php::fpm::pool { $apache_user:
+  php::fpm::pool { $user:
     user                    => $user,
     group                   => $group,
     listen                  => $listen,
