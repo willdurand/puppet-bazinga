@@ -45,11 +45,13 @@ class bazinga::roles::apache (
     }
   }
 
-  file { "/home/${user}/www":
-    ensure  => directory,
-    owner   => $user,
-    group   => $group,
-    mode    => '0644',
-    require => [ User[$user] ],
+  if $user != $::apache::params::user {
+    file { "/home/${user}/www":
+      ensure  => directory,
+      owner   => $user,
+      group   => $group,
+      mode    => '0644',
+      require => [ User[$user] ],
+    }
   }
 }
