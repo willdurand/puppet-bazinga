@@ -29,7 +29,7 @@ class bazinga::php::phpsh (
     path    => '/usr/bin:/bin:/usr/sbin:/sbin',
     cwd     => '/tmp',
     user    => 'root',
-    unless  => "test -f ${phpsh_tarball_name}",
+    unless  => "test -d ${phpsh_target_dir}",
   }
 
   exec { 'phpsh-unpack':
