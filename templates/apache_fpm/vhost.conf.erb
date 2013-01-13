@@ -1,4 +1,7 @@
 # Managed by Puppet
+<% if port != '80' %>
+Listen <%= port %>
+<% end -%>
 NameVirtualHost <%= vhostname %>:<%= port %>
 <VirtualHost <%= vhostname %>:<%= port %>>
   ServerName <%= srvname %>
@@ -13,8 +16,8 @@ NameVirtualHost <%= vhostname %>:<%= port %>
 
   AddType application/x-httpd-phpfpm .php
   Action application/x-httpd-phpfpm /php.fpm
-  Alias /php.fpm /var/www/php-fpm
-  FastCGIExternalServer /var/www/php-fpm -flush -host <%= fastcgi_host %>:<%= fastcgi_port %>
+  Alias /php.fpm /var/www/php-fpm-<%= name %>
+  FastCGIExternalServer /var/www/php-fpm-<%= name %> -flush -host <%= fastcgi_host %>:<%= fastcgi_port %>
 
   DocumentRoot <%= docroot %>
   DirectoryIndex <%= dir_index %>
