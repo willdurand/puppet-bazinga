@@ -58,6 +58,10 @@ class bazinga::roles::apache_fpm (
     unless  => '/usr/bin/test -f /etc/apache2/mods-enabled/fastcgi.load',
   }
 
+  class { 'php::fpm':
+    fpm_ini_source => 'puppet:///modules/bazinga/php/default.ini',
+  }
+
   php::fpm::pool { $user:
     user                    => $user,
     group                   => $group,

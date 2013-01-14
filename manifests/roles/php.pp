@@ -14,17 +14,12 @@ class bazinga::roles::php {
     require     => Class['php'],
   }
 
-  php::conf { 'default':
-    source => 'puppet:///modules/bazinga/php/default.ini',
-    notify => $notify_service,
-  }
-
-  php::module { 'intl':
+  php::conf { 'intl':
     source => 'puppet:///modules/bazinga/php/intl.ini',
     notify => $notify_service,
   }
 
-  php::module { 'curl':
+  php::conf { 'curl':
     source => 'puppet:///modules/bazinga/php/curl.ini',
     notify => $notify_service,
   }
