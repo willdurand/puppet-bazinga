@@ -54,4 +54,12 @@ class bazinga::roles::apache (
       require => [ User[$user] ],
     }
   }
+
+  exec { 'a2enmod-rewrite':
+    command => '/usr/sbin/a2enmod rewrite',
+    user    => 'root',
+    notify  => Service['httpd'],
+    require => Package['httpd'],
+    unless  => '/usr/bin/test -f /etc/apache2/mods-enabled/rewrite.load',
+  }
 }
