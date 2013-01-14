@@ -19,13 +19,15 @@ class bazinga::roles::php {
   }
 
   php::conf { 'intl':
-    source => 'puppet:///modules/bazinga/php/intl.ini',
-    notify => $notify_service,
+    source  => 'puppet:///modules/bazinga/php/intl.ini',
+    notify  => $notify_service,
+    require => Package['php5-intl'],
   }
 
   php::conf { 'curl':
-    source => 'puppet:///modules/bazinga/php/curl.ini',
-    notify => $notify_service,
+    source  => 'puppet:///modules/bazinga/php/curl.ini',
+    notify  => $notify_service,
+    require => Package['php5-curl'],
   }
 
   $apc_package_prefix = $::operatingsystem ? {

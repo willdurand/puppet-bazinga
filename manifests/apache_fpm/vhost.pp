@@ -23,6 +23,9 @@
 # [*fastcgi_port*]
 #   fastcgi port, default: 9000
 #
+# [*server_name*]
+#   Server name, default $name
+#
 # [*serveraliases*]
 #   Server aliases, default empty
 #
@@ -61,6 +64,7 @@ define bazinga::apache_fpm::vhost (
   $priority       = 10,
   $fastcgi_host   = '127.0.0.1',
   $fastcgi_port   = 9000,
+  $server_name    = '',
   $serveraliases  = '',
   $allow_override = 'All',
   $template       = 'bazinga/apache_fpm/vhost.conf.erb',
@@ -79,10 +83,10 @@ define bazinga::apache_fpm::vhost (
     $docroot = $doc_root
   }
 
-  if $servername == '' {
+  if $server_name == '' {
     $srvname = $name
   } else {
-    $srvname = $servername
+    $srvname = $server_name
   }
 
   if $log_root == '' {
