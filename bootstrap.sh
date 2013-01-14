@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #
+# MIT License - William Durand <william.durand1@gmail.com>
+#
 # This script can be used to initialize a Vagrant VM
 # to avoid weird errors due to a random Puppet version.
 #
