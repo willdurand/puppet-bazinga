@@ -14,6 +14,10 @@ class bazinga::roles::php {
     require     => Class['php'],
   }
 
+  package { ['php5-intl', 'php5-curl']:
+    ensure => present,
+  }
+
   php::conf { 'intl':
     source => 'puppet:///modules/bazinga/php/intl.ini',
     notify => $notify_service,
