@@ -15,7 +15,7 @@ class bazinga::roles::php {
   }
 
   package { ['php5-intl', 'php5-curl']:
-    ensure  => present,
+    ensure => present,
   }
 
   php::conf { 'intl':
