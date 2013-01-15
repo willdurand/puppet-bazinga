@@ -7,7 +7,8 @@ class bazinga::roles::php {
     default => undef
   }
 
-  class { '::php': }
+  include ::php::params
+  include ::php
 
   class { 'composer':
     auto_update => true,
@@ -24,10 +25,22 @@ class bazinga::roles::php {
     require => Package['php5-intl'],
   }
 
+  file { 'intl-symlink':
+    ensure  => absent,
+    name    => "${::php::params::conf_dir}/20-intl.ini",
+    require => Php::Conf['intl'],
+  }
+
   php::conf { 'curl':
     source  => 'puppet:///modules/bazinga/php/curl.ini',
     notify  => $notify_service,
     require => Package['php5-curl'],
+  }
+
+  file { 'curl-symlink':
+    ensure  => absent,
+    name    => "${::php::params::conf_dir}/20-curl.ini",
+    require => Php::Conf['curl'],
   }
 
   $apc_package_prefix = $::operatingsystem ? {
