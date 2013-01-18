@@ -10,6 +10,8 @@
 #   ./bootstrap.sh [--distribution <distribution name>]
 #
 
+set -e
+
 if [ '2' -eq "$#" ] && [ '--distribution' == "$1" ] ; then
     DISTRIBUTION="$2"
 fi
