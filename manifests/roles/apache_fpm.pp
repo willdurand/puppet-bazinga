@@ -74,8 +74,4 @@ class bazinga::roles::apache_fpm (
     pm_process_idle_timeout => '20s',
     pm_max_requests         => 1000,
   }
-
-  file { '/var/log/php_errors.log':
-    mode => '0777',
-  }
 }
