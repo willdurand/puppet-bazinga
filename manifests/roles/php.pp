@@ -6,8 +6,8 @@ class bazinga::roles::php {
   include ::php
 
   $notify_service = defined(Class['php::fpm::service']) ? {
-    true    => Class['php::fpm::service'],
-    default => undef
+    true  => Class['php::fpm::service'],
+    false => undef
   }
 
   class { 'composer':
