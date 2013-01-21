@@ -12,9 +12,16 @@ describe 'bazinga::roles::php', :type => :class do
   }
 
   it { should contain_package('php5-intl') }
-  it { should contain_package('php5-curl') }
-
   it { should contain_php__conf('intl') }
+  it { should contain_file('intl-symlink') \
+    .with_ensure('absent')
+  }
+
+  it { should contain_package('php5-curl') }
   it { should contain_php__conf('curl') }
+  it { should contain_file('intl-symlink') \
+    .with_ensure('absent')
+  }
+
   it { should contain_php__module('apc') }
 end

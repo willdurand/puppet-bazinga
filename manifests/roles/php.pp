@@ -2,13 +2,13 @@
 #
 class bazinga::roles::php {
 
+  include ::php::params
+  include ::php
+
   $notify_service = defined(Class['php::fpm::service']) ? {
     true    => Class['php::fpm::service'],
     default => undef
   }
-
-  include ::php::params
-  include ::php
 
   class { 'composer':
     auto_update => true,
@@ -27,7 +27,7 @@ class bazinga::roles::php {
 
   file { 'intl-symlink':
     ensure  => absent,
-    name    => "${::php::params::conf_dir}/20-intl.ini",
+    name    => "${php::params::conf_dir}/20-intl.ini",
     require => Php::Conf['intl'],
   }
 
@@ -39,7 +39,7 @@ class bazinga::roles::php {
 
   file { 'curl-symlink':
     ensure  => absent,
-    name    => "${::php::params::conf_dir}/20-curl.ini",
+    name    => "${php::params::conf_dir}/20-curl.ini",
     require => Php::Conf['curl'],
   }
 

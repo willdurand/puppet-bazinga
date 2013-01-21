@@ -11,7 +11,7 @@
 define bazinga::php::set_var (
   $value,
   $file_ini,
-  $notify = $::bazinga::roles::php::notify_service
+  $notify = $bazinga::roles::php::notify_service
 ) {
 
   exec { "bazinga_php_set_var_${file_ini}_${name}":
