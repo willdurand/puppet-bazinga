@@ -1,0 +1,10 @@
+name        'willdurand-bazinga'
+version     '0.0.1'
+summary     'This module contains a set of roles and some useful functions.'
+description 'This module contains a set of roles and some useful functions.'
+license     'MIT'
+author      'William Durand'
+
+dependency  'puppetlabs/apt', '1.x'
+dependency  'saz/ntp', '2.x'
+dependency  'puppetlabs/stdlib', '>=2.x,<4.0'
