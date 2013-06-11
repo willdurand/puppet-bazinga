@@ -6,13 +6,13 @@ class bazinga::apt {
     'ubuntu': {
       apt::source { 'ubuntu':
         location => 'http://archive.ubuntu.com/ubuntu',
-        release  => 'lucid',
+        release  => $::lsbdistcodename,
         repos    => 'main universe multiverse restricted',
       }
 
       apt::source { 'ondrej-php5':
         location => 'http://ppa.launchpad.net/ondrej/php5/ubuntu',
-        release  => 'lucid',
+        release  => $::lsbdistcodename,
         repos    => 'main',
       }
 
@@ -28,9 +28,14 @@ class bazinga::apt {
         repos    => 'main contrib non-free',
       }
 
+      $dotdeb_release = $::lsbdistcodename ? {
+        'squeeze' => 'squeeze-php54',
+        default   => $::lsbdistcodename
+      }
+
       apt::source { 'dotdeb':
         location => 'http://packages.dotdeb.org',
-        release  => 'squeeze-php54',
+        release  => $dotdeb_release,
         repos    => 'all',
         key      => '89DF5277',
       }
