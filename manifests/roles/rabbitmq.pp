@@ -24,9 +24,8 @@ class bazinga::roles::rabbitmq (
   class { 'rabbitmq::repo::apt': }
 
   class { 'rabbitmq::server':
-    port              => $rabbitmq_port,
-    delete_guest_user => false,
-    require           => Class['rabbitmq::repo::apt'],
+    port    => $rabbitmq_port,
+    require => Class['rabbitmq::repo::apt'],
   }
 
   rabbitmq_user { "rabbitmq-user-${rabbitmq_user}":
