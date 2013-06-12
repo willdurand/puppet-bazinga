@@ -5,8 +5,20 @@ class bazinga::apt {
   case $::operatingsystem {
     'ubuntu': {
       apt::source { 'ubuntu':
-        location => 'http://archive.ubuntu.com/ubuntu',
+        location => 'http://archive.ubuntu.com/ubuntu/',
         release  => $::lsbdistcodename,
+        repos    => 'main universe multiverse restricted',
+      }
+
+      apt::source { 'ubuntu-security':
+        location => 'http://archive.ubuntu.com/ubuntu/',
+        release  => "${::lsbdistcodename}-security",
+        repos    => 'main universe multiverse restricted',
+      }
+
+      apt::source { 'ubuntu-updates':
+        location => 'http://archive.ubuntu.com/ubuntu/',
+        release  => "${::lsbdistcodename}-updates",
         repos    => 'main universe multiverse restricted',
       }
 
