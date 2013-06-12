@@ -30,6 +30,7 @@ class bazinga::roles::rabbitmq (
 
   rabbitmq_user { "rabbitmq-user-${rabbitmq_user}":
     ensure   => present,
+    name     => $rabbitmq_user,
     admin    => true,
     password => $rabbitmq_password,
     provider => 'rabbitmqctl',
@@ -38,6 +39,7 @@ class bazinga::roles::rabbitmq (
 
   rabbitmq_vhost { "rabbitmq-vhost-${rabbitmq_vhost}":
     ensure   => present,
+    name     => $rabbitmq_vhost,
     provider => 'rabbitmqctl',
     require  => Class['rabbitmq::server'],
   }
