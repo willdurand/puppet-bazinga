@@ -40,6 +40,52 @@ The Roles
 This module provides a set of roles. Most of them depends on other
 Puppet modules.
 
+#### `bazinga::roles::base`
+
+This role depends on:
+
+* [puppet-apt](https://github.com/puppetlabs/puppetlabs-apt)
+* [puppet-ntp](https://github.com/saz/puppet-ntp)
+
+It configures APT and NTP, ensures `ssh` is present and running, installs common
+tools such as `screen`, `curl`, `htop`, `ack-grep`, and `vim`, and removes
+useless packages (`nfs-common`, `portmap`) on standard machines (i.e. not
+Vagrant machines as Vagrant requires them).
+
+    class { 'bazinga::roles::base':
+        vagrant => true
+    }
+
+#### `bazinga::roles::apache`
+
+This role depends on:
+
+* [puppet-apache](https://github.com/puppetlabs/puppetlabs-apache)
+
+It installs Apache, enables the `rewrite` mod, and adds a new _home_ directory
+for the Apache user (`/home/${user}/www`) if it is not the default one.
+
+If you want to configure your own Apache users and/or groups, this role will
+create them:
+
+    class { 'bazinga::roles::apache':
+      apache_user  => 'foo',
+      apache_group => 'bar',
+    }
+
+#### `bazinga::roles::apache_fpm`
+
+This role depends on:
+
+* [puppet-apache](https://github.com/puppetlabs/puppetlabs-apache)
+* [puppet-php](https://github.com/saz/puppet-php)
+* [puppet-composer](https://github.com/willdurand/puppet-composer)
+
+It relies on the `bazinga::roles::apache` role.
+
+It installs not only Apache, but also the `fastcgi` mod, enables the `actions`
+and `fastcgi` mods, installs FPM, and creates a FPM pool for the Apache user.
+
 #### `bazinga::roles::php`
 
 This role depends on:
