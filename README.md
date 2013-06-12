@@ -53,7 +53,7 @@ useless packages (`nfs-common`, `portmap`) on standard machines (i.e. not
 Vagrant machines as Vagrant requires them).
 
     class { 'bazinga::roles::base':
-        vagrant => true
+        vagrant => true,
     }
 
 #### `bazinga::roles::apache`
@@ -63,9 +63,10 @@ This role depends on:
 * [puppet-apache](https://github.com/puppetlabs/puppetlabs-apache)
 
 It installs Apache, enables the `rewrite` mod, and adds a new _home_ directory
-for the Apache user (`/home/${user}/www`) if it is not the default one.
+for the Apache user (`/home/${user}/www`) if it is not the default one
+(`www-data` for instance).
 
-If you want to configure your own Apache users and/or groups, this role will
+If you want to configure your own Apache user and/or group, this role will
 create them:
 
     class { 'bazinga::roles::apache':
