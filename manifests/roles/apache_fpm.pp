@@ -12,12 +12,14 @@
 #   The address to listen
 #
 class bazinga::roles::apache_fpm (
-  $apache_user  = 'UNSET',
-  $apache_group = 'UNSET',
-  $listen       = '127.0.0.1:9000'
+  $apache_user    = 'UNSET',
+  $apache_group   = 'UNSET',
+  $listen         = '127.0.0.1:9000',
+  $fpm_ini_source = 'UNSET'
 ) {
 
   include ::apache::params
+  include ::php::params
 
   $user = $apache_user ? {
     'UNSET' => $::apache::params::user,
@@ -27,6 +29,11 @@ class bazinga::roles::apache_fpm (
   $group = $apache_group ? {
     'UNSET' => $::apache::params::group,
     default => $apache_group
+  }
+
+  $ini_source = $fpm_ini_source ? {
+    'UNSET' => 'puppet:///modules/bazinga/php/default.ini',
+    default => $fpm_ini_source
   }
 
   class { 'bazinga::roles::apache':
@@ -58,11 +65,80 @@ class bazinga::roles::apache_fpm (
     unless  => '/usr/bin/test -f /etc/apache2/mods-enabled/fastcgi.load',
   }
 
-  class { 'php::fpm':
-    fpm_ini_source => 'puppet:///modules/bazinga/php/default.ini',
+  # FPM
+  package { $::php::params::fpm_package_name:
+    ensure  => present,
+    require => Class['php'],
   }
 
-  php::fpm::pool { $user:
+  service { $::php::params::fpm_service_name:
+    ensure     => running,
+    hasstatus  => true,
+    hasrestart => true,
+    enable     => true,
+    require    => [
+      Package[$::php::params::fpm_package_name],
+      File[$::php::params::fpm_ini]
+    ],
+  }
+
+  file { $::php::params::fpm_dir:
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    purge   => true,
+    recurse => true,
+    force   => true,
+    require => Package[$::php::params::fpm_package_name],
+    notify  => Service[$::php::params::fpm_service_name],
+  }
+
+  file { "${::php::params::fpm_dir}conf.d":
+    ensure  => link,
+    target  => '../conf.d',
+    force   => true,
+    require => File[$::php::params::fpm_dir],
+    notify  => Service[$::php::params::fpm_service_name],
+  }
+
+  file { "${::php::params::fpm_dir}pool.d":
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    purge   => true,
+    recurse => true,
+    force   => true,
+    require => [
+      Package[$::php::params::fpm_package_name],
+      File[$::php::params::fpm_dir]
+    ],
+    notify  => Service[$::php::params::fpm_service_name],
+  }
+
+  file { $::php::params::fpm_ini:
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    content => $::php::fpm::fpm_ini_content,
+    source  => $ini_source,
+    require => [
+      Package[$::php::params::fpm_package_name],
+      File["${::php::params::fpm_dir}pool.d"]
+      ],
+    notify  => Service[$::php::params::fpm_service_name],
+  }
+
+  file { $::php::params::fpm_conf:
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    content => $::php::fpm::fpm_conf_content,
+    source  => $::php::fpm::fpm_conf_source,
+    require => Package[$::php::params::fpm_package_name],
+    notify  => Service[$::php::params::fpm_service_name],
+  }
+
+  bazinga::fpm::pool { $user:
     user                    => $user,
     group                   => $group,
     listen                  => $listen,

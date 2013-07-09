@@ -1,9 +1,34 @@
 # = Role: bazinga::roles::php
 #
-class bazinga::roles::php {
+# == Parameters:
+#
+# [*cli_ini_content*]
+#   php.ini content for cli env
+#
+# [*cli_ini_source*]
+#   php.ini source for cli env
+#
+class bazinga::roles::php (
+  $cli_ini_content = 'UNSET',
+  $cli_ini_source  = 'UNSET'
+) {
 
   include ::php::params
-  include ::php
+
+  $ini_content = $cli_ini_content ? {
+    'UNSET' => undef,
+    default => $cli_ini_content
+  }
+
+  $ini_source = $cli_ini_source ? {
+    'UNSET' => undef,
+    default => $cli_ini_source
+  }
+
+  class { '::php':
+    cli_ini_content => $ini_content,
+    cli_ini_source  => $ini_source
+  }
 
   $notify_service = defined(Class['php::fpm::service']) ? {
     true  => Class['php::fpm::service'],

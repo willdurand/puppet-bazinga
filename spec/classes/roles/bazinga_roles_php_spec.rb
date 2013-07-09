@@ -24,4 +24,15 @@ describe 'bazinga::roles::php', :type => :class do
   }
 
   it { should contain_php__module('apc') }
+
+  describe 'with custom php.ini (cli) source' do
+    let(:params) {{
+      :cli_ini_content => 'hello = world'
+    }}
+
+    it { should contain_file('/etc/php5/cli/php.ini') \
+      .with_content('hello = world') \
+      .with_source(nil)
+    }
+  end
 end

@@ -28,7 +28,7 @@ describe 'bazinga::php::set_var', :type => :define do
 
     it { should contain_exec('bazinga_php_set_var_my_file.ini_post_max_size') \
       .with_command("sed -i 's/^;*[[:space:]]*post_max_size[[:space:]]*=.*$/post_max_size = 500M/g' my_file.ini") \
-      .with_notify(/^Class/)
+      .with_notify(/^Service/)
     }
   end
 end
