@@ -22,7 +22,7 @@ define bazinga::php::compile_ext (
   exec { "bazinga-php-compile-ext-${name}-download":
     command => "git clone ${repository} ${tmp_dir}",
     path    => '/usr/bin:/bin:/usr/sbin:/sbin',
-    unless  => "test -d ${tmp_dir}",
+    unless  => 'php -m | grep redis',
   }
 
   exec { "bazinga-php-compile-ext-${name}-phpize":
@@ -49,7 +49,7 @@ define bazinga::php::compile_ext (
     path    => '/usr/bin:/bin:/usr/sbin:/sbin',
     cwd     => $tmp_dir,
     require => Exec["bazinga-php-compile-ext-${name}-configure"],
-    unless  => "test -f ${php::params::conf_dir}${name}.ini",
+    unless  => 'php -m | grep redis',
   }
 
   file { "bazinga-php-compile-ext-${name}-config-file":
