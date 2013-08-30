@@ -38,7 +38,5 @@ class bazinga::roles::base (
   }
 
   # Common tools
-  package { ['screen', 'curl', 'htop', 'ack-grep', 'vim']:
-    ensure => latest,
-  }
+  ensure_packages(['screen', 'curl', 'htop', 'ack-grep', 'vim'])
 }
