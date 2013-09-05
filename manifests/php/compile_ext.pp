@@ -13,6 +13,8 @@ define bazinga::php::compile_ext (
   $configure_flags = 'UNDEF'
 ) {
 
+  ensure_packages([ 'git' ])
+
   $tmp_dir = "/tmp/${name}"
   $flags   = $configure_flags ? {
     'UNDEF' => '',
@@ -22,7 +24,7 @@ define bazinga::php::compile_ext (
   exec { "bazinga-php-compile-ext-${name}-download":
     command => "git clone ${repository} ${tmp_dir}",
     path    => '/usr/bin:/bin:/usr/sbin:/sbin',
-    unless  => 'php -m | grep redis',
+    unless  => "php -m | grep ${name}",
   }
 
   exec { "bazinga-php-compile-ext-${name}-phpize":
@@ -49,7 +51,8 @@ define bazinga::php::compile_ext (
     path    => '/usr/bin:/bin:/usr/sbin:/sbin',
     cwd     => $tmp_dir,
     require => Exec["bazinga-php-compile-ext-${name}-configure"],
-    unless  => 'php -m | grep redis',
+    onlyif  => "test -d ${tmp_dir}",
+    unless  => "php -m | grep ${name}",
   }
 
   file { "bazinga-php-compile-ext-${name}-config-file":
@@ -61,12 +64,5 @@ define bazinga::php::compile_ext (
       true  => Class['php::fpm::service'],
       false => undef
     },
-  }
-
-  exec { "bazinga-php-compile-ext-${name}-clean":
-    command => "rm -rf ${tmp_dir}",
-    path    => '/usr/bin:/bin:/usr/sbin:/sbin',
-    require => File["bazinga-php-compile-ext-${name}-config-file"],
-    onlyif  => "test -d ${tmp_dir}",
   }
 }

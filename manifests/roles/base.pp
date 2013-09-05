@@ -29,14 +29,14 @@ class bazinga::roles::base (
 
   # Vagrant
   $ensure_vagrant = $vagrant ? {
-    true    => present,
-    default => absent
+    true    => 'present',
+    default => 'absent'
   }
 
-  package { ['nfs-common', 'portmap']:
+  package { [ 'nfs-common' ]:
     ensure => $ensure_vagrant,
   }
 
   # Common tools
-  ensure_packages([ 'screen', 'curl', 'htop', 'ack-grep', 'vim' ])
+  ensure_packages(['screen', 'curl', 'htop', 'ack-grep', 'vim'])
 }

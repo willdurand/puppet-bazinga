@@ -11,12 +11,10 @@ describe 'bazinga::roles::base', :type => :class do
   it { should contain_service('ssh').with_ensure('running') }
 
   it { should contain_package('nfs-common').with_ensure('absent') }
-  it { should contain_package('portmap').with_ensure('absent') }
 
   describe 'with vagrant = true' do
     let(:params) {{ :vagrant => true }}
 
     it { should contain_package('nfs-common').with_ensure('present') }
-    it { should contain_package('portmap').with_ensure('present') }
   end
 end
