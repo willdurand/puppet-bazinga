@@ -23,8 +23,6 @@ describe 'bazinga::roles::php', :type => :class do
     .with_ensure('absent')
   }
 
-  it { should contain_php__module('apc') }
-
   describe 'with custom php.ini (cli) content' do
     let(:params) {{
       :cli_ini_content => 'hello = world'

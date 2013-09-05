@@ -67,15 +67,4 @@ class bazinga::roles::php (
     name    => "${php::params::conf_dir}/20-curl.ini",
     require => Php::Conf['curl'],
   }
-
-  $apc_package_prefix = $::operatingsystem ? {
-    'ubuntu'     => 'php-',
-    default      => 'php5-'
-  }
-
-  php::module { 'apc':
-    source         => 'puppet:///modules/bazinga/php/apc.ini',
-    notify         => $notify_service,
-    package_prefix => $apc_package_prefix,
-  }
 }
