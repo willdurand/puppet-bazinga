@@ -6,5 +6,5 @@ license     'MIT'
 author      'William Durand'
 
 dependency  'puppetlabs/apt'
-dependency  'puppetlabs/stdlib'
+dependency  'puppetlabs/stdlib', '>= 1.0.0'
 dependency  'saz/ntp'
