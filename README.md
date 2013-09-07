@@ -14,6 +14,21 @@ following modules:
 * [puppet-composer](https://github.com/willdurand/puppet-composer)
 
 
+Installation
+------------
+
+Using the Puppet Module Tool, install the
+[`willdurand/bazinga`](http://forge.puppetlabs.com/willdurand/bazinga)
+package by running the following command:
+
+    puppet module install willdurand/bazinga
+
+Otherwise, clone this repository, and make sure to install the proper
+dependencies.
+
+**Important:** Version `0.0.11` is broken, do **not** use it, **never!**
+
+
 Minimum Requirements
 --------------------
 
