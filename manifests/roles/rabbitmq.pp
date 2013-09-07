@@ -21,11 +21,8 @@ class bazinga::roles::rabbitmq (
   $rabbitmq_port     = 5672
 ) {
 
-  class { 'rabbitmq::repo::apt': }
-
-  class { 'rabbitmq::server':
-    port    => $rabbitmq_port,
-    require => Class['rabbitmq::repo::apt'],
+  class { '::rabbitmq':
+    port => $rabbitmq_port,
   }
 
   rabbitmq_user { "rabbitmq-user-${rabbitmq_user}":
@@ -34,14 +31,12 @@ class bazinga::roles::rabbitmq (
     admin    => true,
     password => $rabbitmq_password,
     provider => 'rabbitmqctl',
-    require  => Class['rabbitmq::server'],
   }
 
   rabbitmq_vhost { "rabbitmq-vhost-${rabbitmq_vhost}":
     ensure   => present,
     name     => $rabbitmq_vhost,
     provider => 'rabbitmqctl',
-    require  => Class['rabbitmq::server'],
   }
 
   rabbitmq_user_permissions { "${rabbitmq_user}@${rabbitmq_vhost}":
@@ -49,9 +44,5 @@ class bazinga::roles::rabbitmq (
     read_permission      => '.*',
     write_permission     => '.*',
     provider             => 'rabbitmqctl',
-    require              => [
-      Rabbitmq_User["rabbitmq-user-${rabbitmq_user}"],
-      Rabbitmq_Vhost["rabbitmq-vhost-${rabbitmq_vhost}"],
-    ],
   }
 }
