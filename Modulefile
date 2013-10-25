@@ -1,5 +1,5 @@
 name        'willdurand-bazinga'
-version '0.0.15'
+version '0.0.16'
 summary     'This module contains a set of roles and some useful functions.'
 description 'This module contains a set of roles and some useful functions.'
 license     'MIT'
