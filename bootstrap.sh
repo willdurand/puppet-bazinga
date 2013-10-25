@@ -7,13 +7,25 @@
 #
 # Usage:
 #
-#   ./bootstrap.sh [--distribution <distribution name>]
+#   ./bootstrap.sh [--distribution <distribution name>] [--version <puppet version>]
 #
 
 set -e
 
 if [ '2' -eq "$#" ] && [ '--distribution' == "$1" ] ; then
     DISTRIBUTION="$2"
+fi
+
+if [ '4' -eq "$#" ] && [ '--distribution' == "$3" ] ; then
+    DISTRIBUTION="$4"
+fi
+
+if [ '2' -eq "$#" ] && [ '--version' == "$1" ] ; then
+    PUPPET_VERSION="$2"
+fi
+
+if [ '4' -eq "$#" ] && [ '--version' == "$3" ] ; then
+    PUPPET_VERSION="$4"
 fi
 
 if [ -z "$PUPPET_VERSION" ]; then
