@@ -12,19 +12,27 @@
 
 set -e
 
-if [ '2' -eq "$#" ] && [ '--distribution' == "$1" ] ; then
+if [ "2" -eq "$#" ] && [ "--distribution" == "$1" ] ; then
     DISTRIBUTION="$2"
 fi
 
-if [ '4' -eq "$#" ] && [ '--distribution' == "$3" ] ; then
-    DISTRIBUTION="$4"
-fi
-
-if [ '2' -eq "$#" ] && [ '--version' == "$1" ] ; then
+if [ "2" -eq "$#" ] && [ "--version" == "$1" ] ; then
     PUPPET_VERSION="$2"
 fi
 
-if [ '4' -eq "$#" ] && [ '--version' == "$3" ] ; then
+if [ "4" -eq "$#" ] && [ "--distribution" == "$1" ] ; then
+    DISTRIBUTION="$2"
+fi
+
+if [ "4" -eq "$#" ] && [ "--version" == "$1" ] ; then
+    PUPPET_VERSION="$2"
+fi
+
+if [ "4" -eq "$#" ] && [ "--distribution" == "$3" ] ; then
+    DISTRIBUTION="$4"
+fi
+
+if [ "4" -eq "$#" ] && [ "--version" == "$3" ] ; then
     PUPPET_VERSION="$4"
 fi
 
