@@ -41,7 +41,6 @@ define bazinga::fpm::pool(
     owner   => 'root',
     group   => 'root',
     content => template('php/fpm-pool.conf.erb'),
-    require => Class['bazinga::roles::apache_fpm'],
     before  => Class['php::fpm::service'],
     notify  => Service[$::php::params::fpm_service_name],
   }
